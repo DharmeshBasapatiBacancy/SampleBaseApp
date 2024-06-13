@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "252852432641",
+    "project_id": "mytestfirebaseapp-1274a",
+    "storage_bucket": "mytestfirebaseapp-1274a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:252852432641:android:c43244ea992dc2a7c13500",
+        "android_client_info": {
+          "package_name": "com.bacancy.samplebaseapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyArAT-_cGonG2qw8Hagfsqc53RPyv2Wdi0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
