@@ -1,21 +1,12 @@
 package com.bacancy.samplebaseapp
 
-import android.content.Context
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
-import android.view.Gravity
-import android.view.LayoutInflater
-import android.view.View
-import android.widget.LinearLayout
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.recyclerview.widget.GridLayoutManager
 import com.bacancy.samplebaseapp.Utils.showToast
 import com.bacancy.samplebaseapp.databinding.ActivityLoginBinding
 
@@ -35,92 +26,12 @@ class LoginActivity : AppCompatActivity() {
             authenticateFingerprint()
         }
 
-        setupDynamicViews()
+        setupDynamicGridList()
     }
 
-    private fun setupDynamicViews() {
-        val parentList =
-            listOf("Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 6", "Item 7")
-
-        val firstListSize = minOf(2, parentList.size) // Ensure first list doesn't exceed parent size
-        val firstList = parentList.subList(0, firstListSize)
-
-        val secondListSize = minOf(3, parentList.size - firstListSize) // Consider remaining items
-        val secondList = parentList.subList(firstListSize, firstListSize + secondListSize)
-
-        val remainingList = parentList.subList(firstListSize + secondListSize, parentList.size)
-
-        if (firstList.isNotEmpty()) {
-            val layout1 = createDynamicLinearLayout(this, firstList)
-            binding.lnrParent.addView(layout1)
-        }
-
-        if (secondList.isNotEmpty()) {
-            val layout2 = createDynamicLinearLayout(this, secondList)
-            binding.lnrParent.addView(layout2)
-        }
-
-        if (remainingList.isNotEmpty()) {
-            val otherChunkedList = remainingList.chunked(3)//Change size according to your needs
-            otherChunkedList.forEach {
-                binding.lnrParent.addView(createDynamicLinearLayout(this, it))
-            }
-        }
-    }
-
-    private fun createDynamicLinearLayout(context: Context, itemNames: List<String>): LinearLayout {
-        val linearLayout = LinearLayout(context)
-        linearLayout.orientation =
-            LinearLayout.HORIZONTAL // Change to HORIZONTAL for horizontal layout
-        itemNames.forEachIndexed { index, s ->
-            val rowItem = createDynamicRowItem(
-                context,
-                s,
-                index == 0,
-                index == itemNames.size - 1
-            )
-            linearLayout.addView(rowItem)
-            if (index != itemNames.size - 1) {
-                linearLayout.addView(createDynamicDivider(context))
-            }
-        }
-
-        return linearLayout
-    }
-
-    private fun createDynamicRowItem(
-        context: Context,
-        text: String,
-        isFirstItem: Boolean,
-        isLastItem: Boolean
-    ): LinearLayout {
-        val inflater = LayoutInflater.from(context)
-        val rowItemLayout = inflater.inflate(R.layout.your_item_layout, null) as LinearLayout
-        val layoutParams = LinearLayout.LayoutParams(
-            LinearLayout.LayoutParams.MATCH_PARENT,
-            LinearLayout.LayoutParams.WRAP_CONTENT
-        )
-        layoutParams.weight = 1.0f
-        rowItemLayout.layoutParams = layoutParams
-        if (isFirstItem) {
-            rowItemLayout.setHorizontalGravity(Gravity.START)
-        } else if (isLastItem) {
-            rowItemLayout.setHorizontalGravity(Gravity.END)
-        } else {
-            rowItemLayout.setHorizontalGravity(Gravity.CENTER)
-        }
-
-        val textView = rowItemLayout.findViewById<TextView>(R.id.tvType)
-
-        textView.text = text
-
-        return rowItemLayout
-    }
-
-    private fun createDynamicDivider(context: Context): View {
-        val inflater = LayoutInflater.from(context)
-        val rowItemLayout = inflater.inflate(R.layout.custom_divider, null) as LinearLayout
-        return rowItemLayout
+    private fun setupDynamicGridList() {
+        val dynamicGridList = DynamicGridList(this, binding.lnrParent)
+        dynamicGridList.setupDynamicViews(listOf("Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 6", "Item 7"))
     }
 
     private fun authenticateFingerprint() {
