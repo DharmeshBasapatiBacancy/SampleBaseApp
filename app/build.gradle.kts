@@ -54,4 +54,5 @@ dependencies {
     implementation("com.google.firebase:firebase-crashlytics")
     implementation("androidx.biometric:biometric:1.1.0")
     implementation("androidx.core:core-splashscreen:1.0.1")
+    implementation("com.google.android.flexbox:flexbox:3.0.0")
 }
