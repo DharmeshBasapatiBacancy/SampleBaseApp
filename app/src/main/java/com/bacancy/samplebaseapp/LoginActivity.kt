@@ -76,7 +76,6 @@ class LoginActivity : AppCompatActivity() {
             val rowItem = createDynamicRowItem(
                 context,
                 s,
-                (index == 0 || index == itemNames.size - 1),
                 index == 0,
                 index == itemNames.size - 1
             )
@@ -92,7 +91,6 @@ class LoginActivity : AppCompatActivity() {
     private fun createDynamicRowItem(
         context: Context,
         text: String,
-        isFirstOrLastItem: Boolean,
         isFirstItem: Boolean,
         isLastItem: Boolean
     ): LinearLayout {
