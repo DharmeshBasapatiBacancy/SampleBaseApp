@@ -52,21 +52,21 @@ class DynamicGridList(private val context: Context, private val parentView: View
         return rowItemLayout
     }
 
-    fun setupDynamicViews(dataList: List<String>) {
+    fun setupDynamicViews(dataList: List<String>, itemsCountInFirstRow: Int = 2, itemsCountInSecondRow: Int = 3, itemsCountInRemainingRow: Int = 3) {
 
-        val firstList = dataList.take(2)
-        val secondList = dataList.drop(2).take(3)
-        val remainingList = dataList.drop(5)
+        val firstRow = dataList.take(itemsCountInFirstRow)
+        val secondRow = dataList.drop(itemsCountInFirstRow).take(itemsCountInSecondRow)
+        val remainingRow = dataList.drop(itemsCountInFirstRow + itemsCountInSecondRow)
 
-        if (firstList.isNotEmpty()) {
-            parentView.addView(createDynamicLinearLayout(firstList))
+        if (firstRow.isNotEmpty()) {
+            parentView.addView(createDynamicLinearLayout(firstRow))
         }
 
-        if (secondList.isNotEmpty()) {
-            parentView.addView(createDynamicLinearLayout(secondList))
+        if (secondRow.isNotEmpty()) {
+            parentView.addView(createDynamicLinearLayout(secondRow))
         }
 
-        remainingList.chunked(3).forEach {
+        remainingRow.chunked(itemsCountInRemainingRow).forEach {
             parentView.addView(createDynamicLinearLayout(it))
         }
     }
