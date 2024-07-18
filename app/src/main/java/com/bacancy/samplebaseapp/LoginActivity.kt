@@ -24,6 +24,7 @@ class LoginActivity : AppCompatActivity() {
 
         binding.btnLoginWithFingerprint.setOnClickListener {
             authenticateFingerprint()
+            startActivity(Intent(this@LoginActivity, MainActivity::class.java))
         }
 
         setupDynamicGridList()
