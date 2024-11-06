@@ -57,4 +57,5 @@ dependencies {
     implementation("androidx.biometric:biometric:1.1.0")
     implementation("androidx.core:core-splashscreen:1.0.1")
     implementation("com.google.android.flexbox:flexbox:3.0.0")
+    implementation("io.coil-kt:coil:2.5.0")
 }

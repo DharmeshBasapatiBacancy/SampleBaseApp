@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    tools:context=".TheViewStubActivity">
+
+    <Button
+        android:id="@+id/btnLoadErrorLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Load Error Layout"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnLoadProgressLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Load Progress Layout"
+        app:layout_constraintTop_toBottomOf="@id/btnLoadErrorLayout" />
+
+    <ViewStub
+        android:id="@+id/vsErrorLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout="@layout/sample_error_layout"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnLoadProgressLayout" />
+
+    <ViewStub
+        android:id="@+id/vsProgressLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout="@layout/sample_progress_layout"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnLoadProgressLayout" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
