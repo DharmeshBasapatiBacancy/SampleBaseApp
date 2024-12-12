@@ -8,6 +8,7 @@ class MyApp: Application() {
     override fun onCreate() {
         super.onCreate()
         FirebaseCrashlytics.getInstance().log("App started")
+        NetworkHelper.initialize(this)
     }
 
 }

@@ -18,8 +18,10 @@
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
     <uses-permission android:name="android.permission.USE_EXACT_ALARM" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
+        android:name=".MyApp"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -30,11 +32,22 @@
         android:theme="@style/Theme.App.Starting"
         tools:targetApi="31">
         <activity
+            android:name=".NetworkDetectActivity"
+            android:exported="true"
+            android:theme="@style/Theme.SampleBaseApp">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".DeepLinkActivity"
             android:exported="true"
             android:theme="@style/Theme.SampleBaseApp">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
@@ -45,17 +58,13 @@
         </activity>
         <activity
             android:name=".TheViewStubActivity"
+            android:theme="@style/Theme.SampleBaseApp"
             android:exported="true" />
+
         <activity
             android:name=".CoilImageLoadingActivity"
-            android:exported="true"
-            android:theme="@style/Theme.SampleBaseApp">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:exported="true" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
         <activity
             android:name=".SamplePIPActivity"
             android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
