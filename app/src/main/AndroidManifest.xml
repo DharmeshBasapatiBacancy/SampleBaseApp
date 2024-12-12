@@ -30,7 +30,24 @@
         android:theme="@style/Theme.App.Starting"
         tools:targetApi="31">
         <activity
+            android:name=".DeepLinkActivity"
+            android:exported="true"
+            android:theme="@style/Theme.SampleBaseApp">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="https" />
+                <data android:host="www.example.com" />
+                <data android:pathPrefix="/product" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".TheViewStubActivity"
+            android:exported="true" />
+        <activity
+            android:name=".CoilImageLoadingActivity"
             android:exported="true"
             android:theme="@style/Theme.SampleBaseApp">
             <intent-filter>
@@ -38,11 +55,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name=".CoilImageLoadingActivity"
-            android:exported="false">
-
         </activity>
         <activity
             android:name=".SamplePIPActivity"
