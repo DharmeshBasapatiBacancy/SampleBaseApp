@@ -58,4 +58,7 @@ dependencies {
     implementation("androidx.core:core-splashscreen:1.0.1")
     implementation("com.google.android.flexbox:flexbox:3.0.0")
     implementation("io.coil-kt:coil:2.5.0")
+    val koinVersion = "3.4.0"
+    implementation("io.insert-koin:koin-core:$koinVersion")
+    implementation("io.insert-koin:koin-android:$koinVersion")
 }

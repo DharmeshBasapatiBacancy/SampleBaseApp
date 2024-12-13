@@ -1,7 +1,10 @@
 package com.bacancy.samplebaseapp
 
 import android.app.Application
+import com.bacancy.samplebaseapp.forKoin.appModule
 import com.google.firebase.crashlytics.FirebaseCrashlytics
+import org.koin.android.ext.koin.androidContext
+import org.koin.core.context.startKoin
 
 class MyApp: Application() {
 
@@ -9,6 +12,11 @@ class MyApp: Application() {
         super.onCreate()
         FirebaseCrashlytics.getInstance().log("App started")
         NetworkHelper.initialize(this)
+
+        startKoin {
+            androidContext(this@MyApp)
+            modules(appModule)
+        }
     }
 
 }
