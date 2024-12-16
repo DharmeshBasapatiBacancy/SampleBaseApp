@@ -2,6 +2,7 @@ package com.bacancy.samplebaseapp
 
 import android.app.Application
 import com.bacancy.samplebaseapp.forKoin.appModule
+import com.bacancy.samplebaseapp.local.databaseModule
 import com.bacancy.samplebaseapp.silentUpdates.networkModule
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import org.koin.android.ext.koin.androidContext
@@ -16,7 +17,7 @@ class MyApp: Application() {
 
         startKoin {
             androidContext(this@MyApp)
-            modules(listOf(appModule, networkModule))
+            modules(listOf(appModule, networkModule, databaseModule))
         }
     }
 

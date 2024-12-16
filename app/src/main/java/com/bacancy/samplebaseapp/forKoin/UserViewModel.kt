@@ -12,6 +12,7 @@ class UserViewModel(private val userRepository: UserRepository): ViewModel() {
 
     private val _users = MutableStateFlow(UsersResponse())
     val users: StateFlow<UsersResponse> = _users.asStateFlow()
+    val usersFromDB = userRepository.getUsersFromDB()
 
     fun fetchUsers() {
         viewModelScope.launch {
