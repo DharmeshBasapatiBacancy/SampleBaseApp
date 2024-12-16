@@ -1,13 +1,13 @@
 package com.bacancy.samplebaseapp.forKoin
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
 import com.bacancy.samplebaseapp.databinding.ActivityKoinSpecificBinding
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import com.bacancy.samplebaseapp.silentUpdates.ApiWorker
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.util.concurrent.TimeUnit
 
 class KoinSpecificActivity : AppCompatActivity() {
     private lateinit var binding: ActivityKoinSpecificBinding
@@ -17,12 +17,13 @@ class KoinSpecificActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityKoinSpecificBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        viewModel.fetchUsers()
-        lifecycleScope.launch(Dispatchers.IO) {
-            viewModel.users.collect { users ->
-                Log.d("KoinActivity", "onCreate: $users")
-            }
-        }
+        scheduleApiWork()
+    }
 
+    private fun scheduleApiWork() {
+        val newWorkRequest = OneTimeWorkRequestBuilder<ApiWorker>()
+            .setInitialDelay(1, TimeUnit.MINUTES)
+            .build()
+        WorkManager.getInstance(applicationContext).enqueue(newWorkRequest)
     }
 }

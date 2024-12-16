@@ -57,8 +57,14 @@ dependencies {
     implementation("androidx.biometric:biometric:1.1.0")
     implementation("androidx.core:core-splashscreen:1.0.1")
     implementation("com.google.android.flexbox:flexbox:3.0.0")
-    implementation("io.coil-kt:coil:2.5.0")
+    implementation("io.coil-kt:coil:2.6.0")
     val koinVersion = "3.4.0"
     implementation("io.insert-koin:koin-core:$koinVersion")
     implementation("io.insert-koin:koin-android:$koinVersion")
+    val retrofitVersion = "2.11.0"
+    // Retrofit
+    implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
+    implementation("com.squareup.retrofit2:converter-gson:$retrofitVersion")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
+    implementation("androidx.work:work-runtime-ktx:2.8.1")
 }

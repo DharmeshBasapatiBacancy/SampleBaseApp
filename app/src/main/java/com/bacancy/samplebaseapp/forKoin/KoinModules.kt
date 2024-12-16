@@ -5,7 +5,7 @@ import org.koin.dsl.module
 
 val appModule = module {
     // Single instance of Repository
-    single<UserRepository> { UserRepositoryImpl() }
+    single<UserRepository> { UserRepositoryImpl(api = get()) }
 
     // Factory for ViewModel
     viewModel { UserViewModel(get()) }

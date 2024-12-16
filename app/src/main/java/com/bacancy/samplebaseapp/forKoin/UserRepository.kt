@@ -1,5 +1,7 @@
 package com.bacancy.samplebaseapp.forKoin
 
+import com.bacancy.samplebaseapp.silentUpdates.UsersResponse
+
 interface UserRepository {
-    suspend fun getUsers(): List<User>
+    suspend fun getUsers(): UsersResponse
 }
