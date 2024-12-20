@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -21,11 +23,17 @@ android {
     }
 
     buildTypes {
+        debug {
+            buildConfigField("String", "STRIPE_PUBLISHABLE_KEY", "\"${getTestStripeKey()}\"")
+            buildConfigField("String", "STRIPE_ACCOUNT_ID", "\"${getTestStripeAccountId()}\"")
+        }
         release {
+            buildConfigField("String", "STRIPE_PUBLISHABLE_KEY", "\"${getLiveStripeKey()}\"")
+            buildConfigField("String", "STRIPE_ACCOUNT_ID", "\"${getLiveStripeAccountId()}\"")
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                "proguard-rules.pro" 
             )
         }
     }
@@ -38,7 +46,32 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
+}
+
+fun getTestStripeKey(): String {
+    val properties = Properties()
+    properties.load(project.rootProject.file("local.properties").inputStream())
+    return properties.getProperty("stripe.test.publishable.key") ?: ""
+}
+
+fun getLiveStripeKey(): String {
+    val properties = Properties()
+    properties.load(project.rootProject.file("local.properties").inputStream())
+    return properties.getProperty("stripe.live.publishable.key") ?: ""
+}
+
+fun getTestStripeAccountId(): String {
+    val properties = Properties()
+    properties.load(project.rootProject.file("local.properties").inputStream())
+    return properties.getProperty("stripe.test.account.id") ?: ""
+}
+
+fun getLiveStripeAccountId(): String {
+    val properties = Properties()
+    properties.load(project.rootProject.file("local.properties").inputStream())
+    return properties.getProperty("stripe.live.account.id") ?: ""
 }
 
 dependencies {
@@ -72,4 +105,6 @@ dependencies {
     implementation("androidx.room:room-runtime:2.6.1")
     implementation("androidx.room:room-ktx:2.6.1")
     kapt("androidx.room:room-compiler:2.6.1")
+
+    implementation("com.stripe:stripe-android:21.2.1")
 }

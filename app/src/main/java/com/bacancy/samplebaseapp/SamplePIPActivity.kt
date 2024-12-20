@@ -50,7 +50,7 @@ class SamplePIPActivity : AppCompatActivity() {
 
     private fun playVideo() {
         binding.apply {
-            try {
+            runCatching {
                 // Build the Uri for the video in the raw folder
                 val rawId = resources.getIdentifier("sample_video", "raw", packageName)
                 val videoUri = Uri.parse("android.resource://" + packageName + "/" + rawId)
@@ -59,8 +59,8 @@ class SamplePIPActivity : AppCompatActivity() {
                 mediaController.setAnchorView(videoView)  // Anchor the controller to the video view
                 videoView.setMediaController(mediaController)
                 videoView.start()
-            } catch (e: IOException) {
-                e.printStackTrace()
+            }.onFailure {
+                it.printStackTrace()
             }
         }
     }

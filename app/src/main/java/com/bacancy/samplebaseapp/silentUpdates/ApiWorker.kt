@@ -20,25 +20,29 @@ class ApiWorker(val context: Context, params: WorkerParameters) : CoroutineWorke
     private val userRepository: UserRepository by inject(UserRepository::class.java)
 
     override suspend fun doWork(): Result {
-        return try {
-            Log.d("ApiWorker", "doWork: Called")
+        Log.d("ApiWorker", "doWork: Called")
+        val newWorkRequest = OneTimeWorkRequestBuilder<ApiWorker>()
+            .setInitialDelay(1, TimeUnit.MINUTES)
+            .build()
+
+        return runCatching {
             val response = userRepository.getUsers()
             Log.d("ApiWorker", "API Response: $response")
-            withContext(Dispatchers.IO){
+
+            withContext(Dispatchers.IO) {
                 val users = response.map {
                     TbUser(it.id, it.name, it.email)
                 }
                 userRepository.insertAllUsers(users)
             }
             Result.success()
-        } catch (e: Exception) {
+        }.onFailure { e ->
             Log.e("ApiWorker", "Exception: ${e.message}")
-            Result.retry()
-        } finally {
-            val newWorkRequest = OneTimeWorkRequestBuilder<ApiWorker>()
-                .setInitialDelay(1, TimeUnit.MINUTES)
-                .build()
+        }.onSuccess {
             WorkManager.getInstance(applicationContext).enqueue(newWorkRequest)
+        }.getOrElse {
+            WorkManager.getInstance(applicationContext).enqueue(newWorkRequest)
+            Result.retry()
         }
     }
 }

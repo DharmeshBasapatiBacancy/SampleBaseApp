@@ -3,8 +3,10 @@ package com.bacancy.samplebaseapp
 import android.app.Application
 import com.bacancy.samplebaseapp.forKoin.appModule
 import com.bacancy.samplebaseapp.local.databaseModule
+import com.bacancy.samplebaseapp.payWithStripe.StripeInitializer
 import com.bacancy.samplebaseapp.silentUpdates.networkModule
 import com.google.firebase.crashlytics.FirebaseCrashlytics
+import com.stripe.android.PaymentConfiguration
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
@@ -19,6 +21,7 @@ class MyApp: Application() {
             androidContext(this@MyApp)
             modules(listOf(appModule, networkModule, databaseModule))
         }
+        StripeInitializer(this).initialize()
     }
 
 }
