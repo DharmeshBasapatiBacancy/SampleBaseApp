@@ -37,7 +37,11 @@
             android:name=".payWithStripe.CheckoutActivity"
             android:theme="@style/Theme.SampleBaseApp"
             android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".NetworkDetectActivity"
@@ -80,11 +84,7 @@
             android:name=".LoginActivity"
             android:theme="@style/Theme.SampleBaseApp"
             android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".MainActivity"
@@ -96,6 +96,9 @@
             android:foregroundServiceType="dataSync" />
 
         <receiver android:name=".background_syncing.AlarmReceiver" />
+        <meta-data
+            android:name="com.google.android.gms.wallet.api.enabled"
+            android:value="true" />
     </application>
 
 </manifest>

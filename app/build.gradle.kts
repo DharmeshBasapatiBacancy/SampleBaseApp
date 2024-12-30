@@ -108,4 +108,5 @@ dependencies {
     kapt("androidx.room:room-compiler:2.6.1")
 
     implementation("com.stripe:stripe-android:21.2.1")
+    implementation("com.google.android.gms:play-services-wallet:19.4.0")
 }
